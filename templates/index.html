@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Prediction</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🌍 Air Quality Prediction</h1>
+
+    <p class="subtitle">
+        Enter the pollutant index values below to predict the Air Quality Index (AQI).
+    </p>
+
+    <form action="/predict" method="POST">
+
+        <label>Sulphur Dioxide Index (SO₂)</label>
+        <input
+            type="number"
+            step="any"
+            name="SOi"
+            placeholder="Enter Sulphur Dioxide Index"
+            value="{{ soi if soi else '' }}"
+            required>
+
+        <label>Nitrogen Dioxide Index (NO₂)</label>
+        <input
+            type="number"
+            step="any"
+            name="Noi"
+            placeholder="Enter Nitrogen Dioxide Index"
+            value="{{ noi if noi else '' }}"
+            required>
+
+        <label>Respirable Particulate Matter Index (RPI)</label>
+        <input
+            type="number"
+            step="any"
+            name="Rpi"
+            placeholder="Enter Respirable Particulate Matter Index"
+            value="{{ rpi if rpi else '' }}"
+            required>
+
+        <label>Suspended Particulate Matter Index (SPMI)</label>
+        <input
+            type="number"
+            step="any"
+            name="SPMi"
+            placeholder="Enter Suspended Particulate Matter Index"
+            value="{{ spmi if spmi else '' }}"
+            required>
+
+        <button type="submit">
+            🌍 Predict Air Quality
+        </button>
+
+    </form>
+
+    {% if prediction %}
+
+    <div class="result">
+
+        <h2>🌿 Air Quality Status</h2>
+
+        <h3>{{ prediction }}</h3>
+
+        <p style="margin-top:12px; color:white; font-size:14px;">
+            This prediction is based on the pollutant index values you entered.
+            Use it as an indication of the current air quality category.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+    <footer>
+        Built with ❤️ using Flask • Scikit-learn • HTML • CSS
+    </footer>
+
+</div>
+
+</body>
+</html>
